@@ -46,4 +46,27 @@ intents.message_content = True
 intents.members = True
 intents.presences = True
 intents.voice_states = True
+prefixes = {}
 
+client = commands.Bot(command_prefix="", intents=intents, shard_count=1)
+client.launch_time = datetime.now(timezone.utc)
+client.owner_ids = [
+    1079294666282909757, 974030025261207552, 758946968449187863,
+    1126200156623216670]
+
+@client.event
+async def on_ready():
+  print(f"logged as {client.user}")
+
+@client.event
+async def on_guild_join(guild):
+    prefixes[str(guild.id)] = '!'
+
+@client.command()
+async def setprefix(ctx, new_prefix: str):
+    prefixes[str(ctx.guild.id)] = new_prefix
+    await ctx.send(f"Prefix changed to: {new_prefix}")
+
+
+token = "MTEyMTc1MDI2NzQ0MDkyNjcyMQ.GXAddC.EPfYuqAyPpNd8--nXlToA1xIknNsSQDzUo5kuw"
+client.run(token)
