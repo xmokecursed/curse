@@ -1,6 +1,5 @@
 import os
 os.system("pip install -U nextcord")
-os.system("pip install akinator.py")
 os.system("pip install -U animec")
 os.system("pip install -U craiyon.py")
 os.system("pip install youtube-dl")
@@ -58,15 +57,5 @@ client.owner_ids = [
 async def on_ready():
   print(f"logged as {client.user}")
 
-@client.event
-async def on_guild_join(guild):
-    prefixes[str(guild.id)] = '!'
-
-@client.command()
-async def setprefix(ctx, new_prefix: str):
-    prefixes[str(ctx.guild.id)] = new_prefix
-    await ctx.send(f"Prefix changed to: {new_prefix}")
-
-
-token = "MTEyMTc1MDI2NzQ0MDkyNjcyMQ.GXAddC.EPfYuqAyPpNd8--nXlToA1xIknNsSQDzUo5kuw"
+token = ""
 client.run(token)
